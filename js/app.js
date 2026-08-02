@@ -9,17 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
     fileInput.addEventListener("change", () => {
 
         if (fileInput.files.length === 0) {
-
             uploadText.textContent = "＋ Добавить фото или видео";
             return;
-
         }
 
         if (fileInput.files.length === 1) {
-
             uploadText.textContent = "✓ " + fileInput.files[0].name;
             return;
-
         }
 
         uploadText.textContent =
@@ -27,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    form.addEventListener("submit", async function (e) {
+    form.addEventListener("submit", async (e) => {
 
         e.preventDefault();
 
@@ -35,10 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
         button.textContent = "ОТПРАВКА...";
 
         const data = {
-
             story: document.getElementById("story").value,
             contact: document.getElementById("author").value
-
         };
 
         try {
@@ -47,12 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 "https://script.google.com/macros/s/AKfycbyXQ1RF7csgqQ1Nj0gAEHHn1OdkyZpQc8cg-0MuSfuwhqVxrxJ61hDxhAfI9LuicWmHXA/exec",
                 {
                     method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
                     body: JSON.stringify(data)
                 }
             );
 
-            if (!response.ok)
-                throw new Error();
+            if (!response.ok) {
+                throw new Error("Ошибка отправки");
+            }
 
             alert(`Спасибо!
 
@@ -62,57 +60,20 @@ XOXO,
 ВЕЙКСЕРФ СПЛЕТНИЦА`);
 
             form.reset();
+            uploadText.textContent = "＋ Добавить фото или видео";
 
-            uploadText.textContent =
-                "＋ Добавить фото или видео";
-
-        }
-
-        catch {
+        } catch (error) {
 
             alert("Ошибка отправки. Попробуйте еще раз.");
 
-        }
+            console.error(error);
 
-        button.disabled = false;
-
-        button.textContent =
-            "♡ ОТПРАВИТЬ АНОНИМНО";
-
-    });
-
-});    // Пока отправку просто имитируем
-
-    form.addEventListener("submit", function (e) {
-
-        e.preventDefault();
-
-        button.disabled = true;
-
-        button.textContent = "ОТПРАВКА...";
-
-        setTimeout(() => {
-
-            alert(
-`Спасибо!
-
-Ваше сообщение получено.
-
-XOXO,
-ВЕЙКСЕРФ СПЛЕТНИЦА`
-            );
-
-            form.reset();
-
-            uploadText.textContent =
-                "＋ Добавить фото или видео";
+        } finally {
 
             button.disabled = false;
+            button.textContent = "♡ ОТПРАВИТЬ АНОНИМНО";
 
-            button.textContent =
-                "♡ ОТПРАВИТЬ АНОНИМНО";
-
-        }, 1200);
+        }
 
     });
 
