@@ -30,37 +30,37 @@ document.addEventListener("DOMContentLoaded", () => {
         button.disabled = true;
         button.textContent = "ОТПРАВКА...";
 
-        const data = {
-            story: document.getElementById("story").value,
-            contact: document.getElementById("author").value
-        };
+const formData = new FormData();
 
-        try {
+formData.append(
+    "story",
+    document.getElementById("story").value
+);
 
-            const response = await fetch(
-                "https://script.google.com/macros/s/AKfycbyXQ1RF7csgqQ1Nj0gAEHHn1OdkyZpQc8cg-0MuSfuwhqVxrxJ61hDxhAfI9LuicWmHXA/exec",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data)
-                }
-            );
+formData.append(
+    "contact",
+    document.getElementById("author").value
+);
 
-            if (!response.ok) {
-                throw new Error("Ошибка отправки");
-            }
+const files = document.getElementById("files").files;
 
-            alert(`Спасибо!
+for (let i = 0; i < files.length; i++) {
+    formData.append("files", files[i]);
+}
 
-Ваше сообщение получено.
+const response = await fetch(
+    "https://wakesurf-gossip-api.wakesurf-gossipgirl.workers.dev/",
+    {
+        method: "POST",
+        body: formData
+    }
+);
 
-XOXO,
-ВЕЙКСЕРФ СПЛЕТНИЦА`);
+const result = await response.json();
 
-            form.reset();
-            uploadText.textContent = "＋ Добавить фото или видео";
+if (!result.success) {
+    throw new Error(result.error);
+}
 
         } catch (error) {
 
