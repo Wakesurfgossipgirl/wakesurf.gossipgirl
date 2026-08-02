@@ -1,1 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Wakesurf Gossip Girl</title>
+
+    <meta name="description"
+        content="Анонимно поделитесь новостями, слухами и историями из мира вейксерфинга.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="app">
+
+        <!-- Instagram -->
+
+        <header class="top-bar">
+
+            <a href="https://instagram.com/"
+                target="_blank"
+                class="instagram">
+
+                Instagram
+
+            </a>
+
+        </header>
+
+        <!-- Логотип -->
+
+        <section class="hero">
+
+            <div class="logo">
+
+                <!-- Здесь позже будет SVG-волна -->
+
+                <div class="wave"></div>
+
+                <h1>
+
+                    <span class="logo-small">
+                        wakesurf
+                    </span>
+
+                    <span class="logo-big">
+                        gossip girl
+                    </span>
+
+                </h1>
+
+                <!-- Здесь позже будут губы -->
+
+                <div class="kiss"></div>
+
+                <div class="xoxo">
+
+                    XOXO
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Цитата -->
+
+        <section class="quote">
+
+            <p id="quote"></p>
+
+        </section>
+
+        <!-- Форма -->
+
+        <form id="gossipForm">
+
+            <label>
+
+                Что произошло?
+
+                <textarea
+                    id="story"
+                    rows="8"
+                    required></textarea>
+
+            </label>
+
+            <label class="upload">
+
+                <input
+                    type="file"
+                    id="files"
+                    multiple
+                    accept="image/*,video/*">
+
+                <span>
+
+                    ＋ Добавить фото или видео
+
+                </span>
+
+            </label>
+
+            <label>
+
+                Имя или Instagram
+                <span>(необязательно)</span>
+
+                <input
+                    type="text"
+                    id="author">
+
+            </label>
+
+            <button
+                type="submit">
+
+                ♡ ОТПРАВИТЬ АНОНИМНО
+
+            </button>
+
+        </form>
+
+        <!-- Нижняя часть -->
+
+        <footer>
+
+            <p>
+
+                Я не раскрою вашу личность.<br>
+
+                Все истории и сплетни
+                собираются анонимно.
+
+            </p>
+
+            <h2>
+
+                ВЕЙКСЕРФ СПЛЕТНИЦА
+
+            </h2>
+
+        </footer>
+
+    </main>
+
+    <script src="js/quotes.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
