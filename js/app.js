@@ -30,43 +30,55 @@ document.addEventListener("DOMContentLoaded", () => {
         button.disabled = true;
         button.textContent = "ОТПРАВКА...";
 
-const formData = new FormData();
+        try {
 
-formData.append(
-    "story",
-    document.getElementById("story").value
-);
+            const formData = new FormData();
 
-formData.append(
-    "contact",
-    document.getElementById("author").value
-);
+            formData.append(
+                "story",
+                document.getElementById("story").value
+            );
 
-const files = document.getElementById("files").files;
+            formData.append(
+                "contact",
+                document.getElementById("author").value
+            );
 
-for (let i = 0; i < files.length; i++) {
-    formData.append("files", files[i]);
-}
+            const files = document.getElementById("files").files;
 
-const response = await fetch(
-    "https://wakesurf-gossip-api.wakesurf-gossipgirl.workers.dev/",
-    {
-        method: "POST",
-        body: formData
-    }
-);
+            for (let i = 0; i < files.length; i++) {
+                formData.append("files", files[i]);
+            }
 
-const result = await response.json();
+            const response = await fetch(
+                "https://wakesurf-gossip-api.wakesurf-gossipgirl.workers.dev/",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
 
-if (!result.success) {
-    throw new Error(result.error);
-}
+            const result = await response.json();
+
+            if (!result.success) {
+                throw new Error(result.error || "Ошибка");
+            }
+
+            alert(`Спасибо!
+
+Ваше сообщение получено.
+
+XOXO,
+ВЕЙКСЕРФ СПЛЕТНИЦА`);
+
+            form.reset();
+            uploadText.textContent = "＋ Добавить фото или видео";
 
         } catch (error) {
 
-            alert("Ошибка отправки. Попробуйте еще раз.");
-
             console.error(error);
+
+            alert("Ошибка отправки.");
 
         } finally {
 
