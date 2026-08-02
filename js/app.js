@@ -59,12 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             );
 
-            const result = await response.json();
-            console.log(result);
+const result = await response.json();
+console.log(result);
 
-            if (!result.success) {
-                throw new Error(result.error || "Ошибка");
-            }
+if (!response.ok || result.ok === false) {
+    throw new Error(result.description || "Ошибка отправки");
+}
 
             alert(`Спасибо!
 
