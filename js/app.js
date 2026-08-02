@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 formData.append("files", files[i]);
             }
 
+            console.log("Отправляем форму");
             const response = await fetch(
                 "https://wakesurf-gossip-api.wakesurf-gossipgirl.workers.dev/",
                 {
@@ -59,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             const result = await response.json();
+            console.log(result);
 
             if (!result.success) {
                 throw new Error(result.error || "Ошибка");
